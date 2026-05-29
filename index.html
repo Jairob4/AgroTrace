@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroTrace · Plataforma de trazabilidad agroturística</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-deep:   #0a2e1a;
+      --green-mid:    #1a5c34;
+      --green-accent: #2d9e58;
+      --green-bright: #4ecf80;
+      --amber:        #f5a623;
+      --amber-light:  #ffd27a;
+      --cream:        #fdf8f0;
+      --cream-dark:   #f0e8d6;
+      --white:        #ffffff;
+      --text-dark:    #0a2e1a;
+      --text-muted:   #4a6b56;
+      --red:          #e74c3c;
+      --ok:           #1db954;
+      --sans:  'Syne', sans-serif;
+      --serif: 'DM Serif Display', serif;
+      --mono:  'DM Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--cream); color: var(--text-dark); }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--green-deep);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 58px;
+    }
+    .nav-logo {
+      font-family: var(--sans); font-weight: 800; font-size: 1.1rem;
+      color: var(--white); text-decoration: none; letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--amber); }
+    .nav-cta {
+      font-family: var(--sans); font-weight: 700; font-size: 0.85rem;
+      color: var(--green-bright); text-decoration: none;
+      border: 1px solid rgba(78,207,128,0.3); border-radius: 100px;
+      padding: 0.4rem 1rem; transition: all 0.2s;
+    }
+    .nav-cta:hover { background: rgba(78,207,128,0.1); color: var(--white); }
+
+    /* HERO */
+    .hero {
+      background: var(--green-deep); min-height: 92vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 5rem 2rem;
+    }
+    .hero-inner { max-width: 680px; width: 100%; }
+    .hero-badge {
+      display: inline-flex; align-items: center;
+      background: rgba(78,207,128,0.1); border: 1px solid rgba(78,207,128,0.25);
+      border-radius: 100px; padding: 0.35rem 0.9rem;
+      font-family: var(--mono); font-size: 0.75rem; color: var(--green-bright);
+      letter-spacing: 0.02em; margin-bottom: 2rem;
+    }
+    .hero-headline {
+      font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem);
+      color: var(--white); line-height: 1.1; margin-bottom: 1.5rem;
+    }
+    .hero-sub {
+      font-family: var(--sans); font-size: 1rem; font-weight: 400;
+      color: rgba(255,255,255,0.55); max-width: 480px; line-height: 1.65;
+      margin-bottom: 2.5rem;
+    }
+    .btn-primary {
+      display: inline-block; background: var(--green-accent); color: var(--white);
+      font-family: var(--sans); font-weight: 700; font-size: 1rem;
+      padding: 1rem 2.5rem; border-radius: 12px; text-decoration: none;
+      border: none; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-primary:hover { background: var(--green-mid); transform: translateY(-2px); }
+    .trust-pills {
+      display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem;
+    }
+    .trust-pill {
+      font-family: var(--sans); font-weight: 700; font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.05); border-radius: 100px;
+      padding: 0.4rem 0.75rem;
+    }
+
+    /* HOW IT WORKS */
+    .section { padding: 5rem 2rem; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-eyebrow {
+      font-family: var(--sans); font-weight: 700; font-size: 0.7rem;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted);
+    }
+    .section-title {
+      font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      color: var(--green-deep); margin-top: 0.5rem; line-height: 1.2;
+    }
+    .section-title.light { color: var(--white); }
+    .cards-row {
+      display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 3rem;
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(10,46,26,0.07);
+      border-radius: 14px; padding: 1.5rem;
+      flex: 1; min-width: 200px;
+    }
+    .card-num {
+      font-family: var(--mono); font-size: 2rem;
+      color: rgba(45,158,88,0.3); line-height: 1;
+    }
+    .card-title {
+      font-family: var(--sans); font-weight: 700; font-size: 1rem;
+      color: var(--green-deep); margin-top: 0.5rem;
+    }
+    .card-desc {
+      font-family: var(--sans); font-size: 0.88rem; color: var(--text-muted);
+      margin-top: 0.5rem; line-height: 1.6;
+    }
+
+    /* AGENTS */
+    .agents-section {
+      background: var(--green-deep); padding: 5rem 2rem;
+    }
+    .agents-row {
+      display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem;
+    }
+    .agent-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(78,207,128,0.12);
+      border-radius: 14px; padding: 1.25rem;
+      flex: 1; min-width: 180px;
+    }
+    .agent-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+    .agent-name {
+      font-family: var(--sans); font-weight: 700; font-size: 0.95rem;
+      color: var(--white);
+    }
+    .agent-desc {
+      font-family: var(--sans); font-size: 0.82rem;
+      color: rgba(255,255,255,0.45); margin-top: 0.4rem; line-height: 1.6;
+    }
+
+    /* FINAL CTA */
+    .cta-section {
+      background: var(--cream); padding: 5rem 2rem; text-align: center;
+    }
+    .cta-title {
+      font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2rem);
+      color: var(--green-deep); margin-bottom: 2rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--green-deep); padding: 2rem;
+      text-align: center;
+      font-family: var(--sans); font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 600px) {
+      .cards-row, .agents-row { flex-direction: column; }
+      .hero { padding: 4rem 1.5rem; }
+      nav { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">🌿 Agro<span>Trace</span></a>
+  <a class="nav-cta" href="src/main/resources/static/demo.html">Ver demo →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🌱 Agroturismo verificable · Magdalena, Colombia</div>
+    <h1 class="hero-headline">
+      Cada cosecha cuenta<br>
+      una historia que<br>
+      el mundo puede verificar.
+    </h1>
+    <p class="hero-sub">
+      Pequeñas fincas del Magdalena con identidad digital,
+      trazabilidad criptográfica y narrativa exportable.
+      Generada automáticamente por IA.
+    </p>
+    <a class="btn-primary" href="src/main/resources/static/demo.html">Registrar tu finca ahora →</a>
+    <div class="trust-pills">
+      <span class="trust-pill">🔐 SHA-256 verificable</span>
+      <span class="trust-pill">🤖 3 agentes IA activos</span>
+      <span class="trust-pill">🌍 Ficha exportable ES/EN</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" style="background: var(--cream);">
+  <div class="section-inner">
+    <div class="section-eyebrow">¿Cómo funciona?</div>
+    <div class="section-title">De la finca al mercado global, automáticamente.</div>
+    <div class="cards-row">
+      <div class="card">
+        <div class="card-num">01</div>
+        <div class="card-title">Registra el evento</div>
+        <div class="card-desc">
+          El operario llena un formulario simple. Cada campo
+          queda sellado en una cadena criptográfica SHA-256.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <div class="card-title">La IA genera tu narrativa</div>
+        <div class="card-desc">
+          3 agentes especializados crean la historia del producto,
+          la ficha técnica bilingüe y actualizan tu reputación.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <div class="card-title">El mundo lo verifica</div>
+        <div class="card-desc">
+          Un QR lleva a compradores, turistas e importadores
+          al pasaporte público del producto.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section class="agents-section">
+  <div class="section-inner">
+    <div class="hero-badge">🤖 Ecosistema de agentes IA</div>
+    <div class="section-title light" style="margin-top: 0.75rem;">
+      Tres agentes. Una sola acción del agricultor.
+    </div>
+    <div class="agents-row">
+      <div class="agent-card">
+        <span class="agent-icon">✍️</span>
+        <div class="agent-name">Agente Storytelling</div>
+        <div class="agent-desc">
+          Genera la historia de origen del producto en español.
+          Auténtica, evocadora, lista para el mercado.
+        </div>
+      </div>
+      <div class="agent-card">
+        <span class="agent-icon">📋</span>
+        <div class="agent-name">Agente Exportador</div>
+        <div class="agent-desc">
+          Produce la ficha técnica bilingüe ES/EN con datos
+          verificables para importadores internacionales.
+        </div>
+      </div>
+      <div class="agent-card">
+        <span class="agent-icon">⭐</span>
+        <div class="agent-name">Agente Reputacional</div>
+        <div class="agent-desc">
+          Actualiza el score de confianza de la finca con
+          cada evento registrado y verificado.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <div class="cta-title">Tu finca merece ser conocida en el mundo.</div>
+  <a class="btn-primary" href="src/main/resources/static/demo.html">Ir al demo →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  AgroTrace · Hackathon 2026 · Magdalena, Colombia
+</footer>
+
+</body>
+</html>
